@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	aux "github.com/NDJSec/Go_ShadowFramework/portscan"
 )
 
 func main() {
@@ -17,6 +19,9 @@ func main() {
 
 		switch strings.ToLower(UserInput.Text()) {
 		case "scan":
+			fmt.Print("SFconsole auxiliary(portscan) > ")
+			UserInput.Scan()
+			aux.PortScanHandler(UserInput.Text())
 		case "exit":
 			break
 		}

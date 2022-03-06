@@ -1,11 +1,13 @@
 package portscan
 
 import (
+	"context"
 	"fmt"
 	"net"
 	"os/exec"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"golang.org/x/sync/semaphore"
@@ -16,8 +18,8 @@ type PortScanner struct {
 	lock *semaphore.Weighted
 }
 
-func Init() {
-
+type Options struct {
+	port string
 }
 
 func Ulimit() int64 {
@@ -54,6 +56,44 @@ func ScanPort(ip string, port int, timeout time.Duration) {
 	fmt.Println(port, "open")
 }
 
-func portscan() {
+func (ps *PortScanner) Start(f, l int, timeout time.Duration) {
+	wg := sync.WaitGroup{}
+	defer wg.Wait()
 
+	for port := f; port <= l; port++ {
+		ps.lock.Acquire(context.TODO(), 1)
+		wg.Add(1)
+		go func(port int) {
+			defer ps.lock.Release(1)
+			defer wg.Done()
+			ScanPort(ps.ip, port, timeout)
+		}(port)
+	}
+}
+
+func PortScanHandler(UserInput string) {
+	switch strings.ToLower(UserInput) {
+	case "show options":
+		//Print Options Here
+	case "set":
+		//Handle setting options here
+	case "help":
+		//Print help menu for this module
+	}
+
+}
+
+func setPortScanOptions() {
+
+	/*options := &Options{
+		ip:
+	}*/
+}
+
+func portScan() {
+	ps := &PortScanner{
+		ip:   options.ip,
+		lock: semaphore.NewWeighted(Ulimit()),
+	}
+	ps.Start(1, 65535, 500*time.Millisecond)
 }
