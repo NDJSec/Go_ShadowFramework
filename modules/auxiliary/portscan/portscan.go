@@ -10,6 +10,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/NDJSec/Go_ShadowFramework/utils"
 	"golang.org/x/sync/semaphore"
 )
 
@@ -18,9 +19,7 @@ type PortScanner struct {
 	lock *semaphore.Weighted
 }
 
-type Options struct {
-	port string
-}
+var rhost string
 
 func Ulimit() int64 {
 	out, err := exec.Command("ulimit", "-n").Output()
@@ -72,27 +71,29 @@ func (ps *PortScanner) Start(f, l int, timeout time.Duration) {
 }
 
 func PortScanHandler(UserInput string) {
-	switch strings.ToLower(UserInput) {
-	case "show options":
-		//Print Options Here
-	case "set":
-		//Handle setting options here
-	case "help":
+	input := strings.ToLower(UserInput)
+	if strings.Contains(input, "show options") {
+		fmt.Println("Module Options (auxiliary/portscan)")
+		fmt.Println("Name 	Current Setting	Required	Description")
+		fmt.Println("----    --------------- --------        -----------")
+		fmt.Printf("RHOST  %s		        yes		Host to be scanned\n", rhost)
+	} else if strings.Contains(input, "set") {
+		if strings.Contains(input, "rhost") {
+			rhost = input[10:]
+		}
+	} else if strings.Contains(input, "run") {
+		portScan()
+	} else if strings.Contains(input, "back") {
+		utils.SetRunVar("portscan", false)
+	} else if strings.Contains(input, "help") {
 		//Print help menu for this module
 	}
 
 }
 
-func setPortScanOptions() {
-
-	/*options := &Options{
-		ip:
-	}*/
-}
-
 func portScan() {
 	ps := &PortScanner{
-		ip:   options.ip,
+		ip:   rhost,
 		lock: semaphore.NewWeighted(Ulimit()),
 	}
 	ps.Start(1, 65535, 500*time.Millisecond)

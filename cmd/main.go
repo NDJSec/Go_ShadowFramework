@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/NDJSec/Go_ShadowFramework/modules/auxiliary/portscan"
+	"github.com/NDJSec/Go_ShadowFramework/utils"
 )
 
 func main() {
@@ -21,9 +22,17 @@ func main() {
 		case "scan":
 			fmt.Print("SFconsole auxiliary(portscan) > ")
 			UserInput.Scan()
-			portscan.PortScanHandler(UserInput.Text())
+			utils.SetRunVar("portscan", true)
+			for utils.GetRunVar("portscan") {
+				portscan.PortScanHandler(UserInput.Text())
+				if UserInput.Text() != "back" {
+					fmt.Print("SFconsole auxiliary(portscan) > ")
+					UserInput.Scan()
+				}
+
+			}
 		case "exit":
-			break
+			running = false
 		}
 	}
 
