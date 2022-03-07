@@ -22,6 +22,10 @@ type Options struct {
 	port string
 }
 
+func init() {
+	var rhost string
+}
+
 func Ulimit() int64 {
 	out, err := exec.Command("ulimit", "-n").Output()
 	if err != nil {
@@ -74,7 +78,10 @@ func (ps *PortScanner) Start(f, l int, timeout time.Duration) {
 func PortScanHandler(UserInput string) {
 	switch strings.ToLower(UserInput) {
 	case "show options":
-		//Print Options Here
+		fmt.Println("Module Options (auxiliary/portscan)")
+		fmt.Println("Name 	Current Setting	Required	Description")
+		fmt.Println("----   --------------- --------    -----------")
+		fmt.Fprintln("RHOST  %s				yes			Host to be scanned", rhost)
 	case "set":
 		//Handle setting options here
 	case "help":
