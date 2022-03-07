@@ -21,6 +21,10 @@ type PortScanner struct {
 
 var rhost string
 
+func init() {
+	var rhost string
+}
+
 func Ulimit() int64 {
 	out, err := exec.Command("ulimit", "-n").Output()
 	if err != nil {
@@ -71,6 +75,7 @@ func (ps *PortScanner) Start(f, l int, timeout time.Duration) {
 }
 
 func PortScanHandler(UserInput string) {
+<<<<<<< HEAD
 	input := strings.ToLower(UserInput)
 	if strings.Contains(input, "show options") {
 		fmt.Println("Module Options (auxiliary/portscan)")
@@ -86,6 +91,17 @@ func PortScanHandler(UserInput string) {
 	} else if strings.Contains(input, "back") {
 		utils.SetRunVar("portscan", false)
 	} else if strings.Contains(input, "help") {
+=======
+	switch strings.ToLower(UserInput) {
+	case "show options":
+		fmt.Println("Module Options (auxiliary/portscan)")
+		fmt.Println("Name 	Current Setting	Required	Description")
+		fmt.Println("----   --------------- --------    -----------")
+		fmt.Fprintln("RHOST  %s				yes			Host to be scanned", rhost)
+	case "set":
+		//Handle setting options here
+	case "help":
+>>>>>>> 9d1fbace483c3c0ffe5903570b53fb1fc2f2303e
 		//Print help menu for this module
 	}
 
