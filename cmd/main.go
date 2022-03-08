@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/NDJSec/Go_ShadowFramework/modules/auxiliary/portscan"
+	winrevshell "github.com/NDJSec/Go_ShadowFramework/modules/exploit/win_rev_shell"
 	"github.com/NDJSec/Go_ShadowFramework/utils"
 )
 
@@ -34,11 +35,23 @@ func main() {
 		case "test rev shell":
 			fmt.Print("SFconsole exploit(win_rev_shell) > ")
 			UserInput.Scan()
-			utils.SetRunVar("winrevshell", true)
-			for utils.GetRunVar("winrevshell") {
+			utils.SetRunVar("winrevshell_client", true)
+			for utils.GetRunVar("winrevshell_client") {
 				portscan.PortScanHandler(UserInput.Text())
 				if UserInput.Text() != "back" {
 					fmt.Print("SFconsole exploit(win_rev_shell) > ")
+					UserInput.Scan()
+				}
+
+			}
+		case "winshell":
+			fmt.Print("SFconsole exploit(win_rev_shell_handler) > ")
+			UserInput.Scan()
+			utils.SetRunVar("winrevshell_handler", true)
+			for utils.GetRunVar("winrevshell_handler") {
+				winrevshell.WinRevShellServerHandler(UserInput.Text())
+				if UserInput.Text() != "back" {
+					fmt.Print("SFconsole exploit(win_rev_shell_handler) > ")
 					UserInput.Scan()
 				}
 
