@@ -7,10 +7,7 @@ import (
 	"strings"
 
 	"github.com/NDJSec/Go_ShadowFramework/modules/auxiliary/portscan"
-<<<<<<< HEAD
 	"github.com/NDJSec/Go_ShadowFramework/utils"
-=======
->>>>>>> 9d1fbace483c3c0ffe5903570b53fb1fc2f2303e
 )
 
 func main() {
@@ -25,7 +22,6 @@ func main() {
 		case "scan":
 			fmt.Print("SFconsole auxiliary(portscan) > ")
 			UserInput.Scan()
-<<<<<<< HEAD
 			utils.SetRunVar("portscan", true)
 			for utils.GetRunVar("portscan") {
 				portscan.PortScanHandler(UserInput.Text())
@@ -35,9 +31,19 @@ func main() {
 				}
 
 			}
-=======
-			portscan.PortScanHandler(UserInput.Text())
->>>>>>> 9d1fbace483c3c0ffe5903570b53fb1fc2f2303e
+		case "test rev shell":
+			fmt.Print("SFconsole exploit(win_rev_shell) > ")
+			UserInput.Scan()
+			utils.SetRunVar("winrevshell", true)
+			for utils.GetRunVar("winrevshell") {
+				portscan.PortScanHandler(UserInput.Text())
+				if UserInput.Text() != "back" {
+					fmt.Print("SFconsole exploit(win_rev_shell) > ")
+					UserInput.Scan()
+				}
+
+			}
+
 		case "exit":
 			running = false
 		}

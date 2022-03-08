@@ -1,2 +1,6 @@
+github.com/cenkalti/go-sched v0.0.0-20140227015947-82193a5e25de h1:kKzOii/GK1LNyveJ2oUZyyAH8R2fsn/Cgd6kX4djGTw=
+github.com/cenkalti/go-sched v0.0.0-20140227015947-82193a5e25de/go.mod h1:Ebl+z6+29uZsPCetcDDWfkMbBc0l34mYnVLR3NmAI1M=
+github.com/cenkalti/gopqueue v0.0.0-20130928053223-7e7bc6b2cb51 h1:6tTy2WVukTdI3AUHrh9ReGyjVWZmM2YwW9wsspySwdc=
+github.com/cenkalti/gopqueue v0.0.0-20130928053223-7e7bc6b2cb51/go.mod h1:at+Wsg7msSWX4oNIPdiaPXcsfNRNaEdCHJdMxvnctl4=
 golang.org/x/sync v0.0.0-20210220032951-036812b2e83c h1:5KslGYwFpkhGh+Q16bwMP3cOontH8FOep7tGV86Y7SQ=
 golang.org/x/sync v0.0.0-20210220032951-036812b2e83c/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
